@@ -5,16 +5,28 @@
 name: on-merge-workflow
 
 on:
-# [to be filled]
+  merge_request:
+  branches: [master]
+  workflow_dispatch:
 jobs:
   test:
-    runs-on: # [to be filled]
+    runs-on:  ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
-        # [rest to be filled]
+        run: npm i && npm run test
   build-deploy:
-    runs-on: # [to be filled]
+    runs-on: ubuntu-latest
     steps:
-    # [rest to be filled]
+    env: 
+      HEROKU_API_KEY: ${secrets.bd924489-70ad-4af5-9547-71d04917e387}
+    run: heroku container:login 
+  - name: Build and push
+    env:
+      HEROKU_API_KEY: ${secrets.bd924489-70ad-4af5-9547-71d04917e387}
+    run: heroku container:push -a episodesearch web 
+  - name: Release
+    env:
+      HEROKU_API_KEY: ${secrets.bd924489-70ad-4af5-9547-71d04917e387}
+    run: heroku container:release -a episodesearch web 
