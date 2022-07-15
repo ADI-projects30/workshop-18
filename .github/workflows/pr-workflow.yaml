@@ -4,14 +4,12 @@
 name: pr-workflow
 
 on:
- pull_request:
-  branches: [master]
-  workflow_dispatch:
+# [to be filled]
 jobs:
   test:
-    runs-on:  ubuntu-latest
+    runs-on: # [to be filled]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
-        run: npm run test
+        # [rest to be filled]
